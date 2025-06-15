@@ -3,7 +3,7 @@
   <p>📊 A beautiful GitHub stats tracker with a modern dark theme</p>
   
   [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-  ![Image](https://github.com/user-attachments/assets/6749ff3b-3e42-4722-bab2-0e4f4b2f2e9d)
+ ![Image](https://github.com/user-attachments/assets/40bc2818-5165-4e3f-b934-9a213491cf77)
 </div>
 
 ## ✨ Features
