@@ -3,19 +3,58 @@
   <p>📊 A beautiful GitHub stats tracker with a modern dark theme</p>
   
   [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-  [![GitHub stars](https://img.shields.io/github/stars/Maryam593/owddm.github.io?style=social)](https://github.com/Maryam593/owddm.github.io/stargazers)
+  [![GitHub stars](https://img.shields.io/github/stars/Maryam593/GitPulse?style=social)](https://github.com/Maryam593/GitPulse/stargazers)
+  [![GitHub issues](https://img.shields.io/github/issues/Maryam593/GitPulse)](https://github.com/Maryam593/GitPulse/issues)
+  [![GitHub pull requests](https://img.shields.io/github/issues-pr/Maryam593/GitPulse)](https://github.com/Maryam593/GitPulse/pulls)
   
-  ![GitPulse Screenshot](</div>![Uploading gitpulse .png…]())
+  <img src="https://github.com/user-attachments/assets/40bc2818-5165-4e3f-b934-9a213491cf77" alt="GitPulse Demo" width="800" />
+</div>
 
+## 📖 Table of Contents
+
+- [Features](#-features)
+- [Demo](#-demo)
+- [Getting Started](#-getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Running the Application](#running-the-application)
+- [Built With](#-built-with)
+- [API Endpoints](#-api-endpoints)
+- [Contributing](#-contributing)
+- [License](#-license)
+- [Acknowledgments](#-acknowledgments)
 
 ## ✨ Features
 
-- 🎨 Sleek dark theme with GitHub-inspired design
-- 📈 Comprehensive GitHub statistics and metrics
-- 🏆 GitHub profile trophies display
-- 📊 Contribution heatmap visualization
-- 🚀 Fast and responsive interface
-- 🔍 Easy GitHub profile lookup
+- 🎨 **Modern Dark Theme**: Sleek, GitHub-inspired dark interface that's easy on the eyes
+- 📊 **Comprehensive Stats**: Detailed GitHub statistics including stars, commits, and more
+- 🏆 **Profile Trophies**: Show off your GitHub achievements with beautiful trophy display
+- 📈 **Streak Stats**: Track your coding streak and contributions over time
+- 🌟 **Top Languages**: Visualize your most used programming languages
+- 🗓 **Contribution Heatmap**: Interactive heatmap of your GitHub activity
+- ⚡ **Lightning Fast**: Optimized for performance with minimal loading times
+- 📱 **Fully Responsive**: Works perfectly on desktop, tablet, and mobile devices
+
+## 🎥 Demo
+
+[![GitPulse Demo](https://github.com/user-attachments/assets/40bc2818-5165-4e3f-b934-9a213491cf77)](https://your-demo-url.com)
+
+*Click the image above to view a live demo (if available)*
+
+## 🔍 Preview
+
+```
++------------------------+     +------------------------+
+|   GitHub Username     |     |     User Dashboard     |
+|   [             ]     | --> |                        |
+|   [Generate Dashboard] |     | 1. Profile Card        |
++------------------------+     | 2. GitHub Stats       |
+                               | 3. Streak Stats        |
+                               | 4. Top Languages       |
+                               | 5. Contribution Graph  |
+                               | 6. GitHub Trophies     |
+                               +------------------------+
+```
 
 ## 🚀 Getting Started
 
@@ -29,8 +68,8 @@
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/Maryam593/owddm.github.io.git
-   cd owddm.github.io
+   git clone https://github.com/Maryam593/GitPulse.git
+   cd GitPulse
    ```
 
 2. Install dependencies for both client and server:
@@ -62,16 +101,51 @@
 
 ## 🛠️ Built With
 
-- **Frontend**: 
-  - React
-  - Tailwind CSS
-  - Hero Icons
-  - Axios
+### Frontend
+- ⚛️ **React** - JavaScript library for building user interfaces
+- 🎨 **Tailwind CSS** - Utility-first CSS framework
+- ✨ **Hero Icons** - Beautiful hand-crafted SVG icons
+- 🔄 **Axios** - Promise-based HTTP client
+- 🔄 **React Icons** - Popular icons for React applications
 
-- **Backend**:
-  - Node.js
-  - Express
-  - Axios
+### Backend
+- 🚀 **Node.js** - JavaScript runtime
+- 🌐 **Express** - Web application framework
+- 🔄 **Axios** - For making HTTP requests to GitHub API
+- 🔒 **CORS** - Middleware for enabling CORS
+
+## 🌐 API Endpoints
+
+### `GET /api/github-stats/:username`
+Fetches GitHub statistics for the specified username.
+
+**Response:**
+```json
+{
+  "username": "octocat",
+  "avatar_url": "https://avatars.githubusercontent.com/u/...",
+  "stats": {
+    "trophies": "<svg>...</svg>",
+    "github_stats": "<svg>...</svg>",
+    "streak_stats": "<svg>...</svg>",
+    "top_languages": "<svg>...</svg>"
+  }
+}
+```
+
+## 🤝 Contributing
+
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+### 🐛 Bug Reports & Feature Requests
+
+Please use the [issue tracker](https://github.com/Maryam593/GitPulse/issues) to report any bugs or file feature requests.
 
 ## 📄 License
 
