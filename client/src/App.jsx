@@ -32,7 +32,7 @@ function App() {
     <div className="min-h-screen bg-gray-900 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
         <h1 className="text-3xl font-bold text-center text-white mb-8">
-          GitPulse - Track your GitHub life <span className="text-green-500">🫀</span>
+          GitPulse - Track your GitHub life <span className="text-green-600">🫀</span>
         </h1>
 
         {/* Search Form */}
@@ -44,14 +44,14 @@ function App() {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 placeholder="Enter GitHub username"
-                className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-600 focus:border-green-600"
                 disabled={loading}
               />
             </div>
             <button
               type="submit"
               disabled={loading || !username.trim()}
-              className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-4 py-2 bg-green-700 text-white rounded-md hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-600 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? 'Loading...' : 'Generate Dashboard'}
             </button>
@@ -81,7 +81,7 @@ function App() {
                 <div className="flex flex-col sm:flex-row items-center text-center sm:text-left">
                   <div className="flex-shrink-0 mb-4 sm:mb-0 sm:mr-6">
                     <img
-                      className="h-24 w-24 rounded-full border-4 border-green-500"
+                      className="h-24 w-24 rounded-full border-4 border-green-600"
                       src={userData.avatar_url}
                       alt={`${userData.username}'s avatar`}
                     />
@@ -94,7 +94,7 @@ function App() {
                       href={`https://github.com/${userData.username}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="mt-1 text-green-400 hover:text-green-300 inline-flex items-center"
+                      className="mt-1 text-green-500 hover:text-green-400 inline-flex items-center"
                     >
                       @{userData.username}
                       <svg
