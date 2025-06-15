@@ -3,26 +3,10 @@
   <p>📊 A beautiful GitHub stats tracker with a modern dark theme</p>
   
   [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-  [![GitHub stars](https://img.shields.io/github/stars/Maryam593/GitPulse?style=social)](https://github.com/Maryam593/GitPulse/stargazers)
-  [![GitHub issues](https://img.shields.io/github/issues/Maryam593/GitPulse)](https://github.com/Maryam593/GitPulse/issues)
-  [![GitHub pull requests](https://img.shields.io/github/issues-pr/Maryam593/GitPulse)](https://github.com/Maryam593/GitPulse/pulls)
+  [![GitHub stars](https://img.shields.io/github/stars/Maryam593/owddm.github.io?style=social)](https://github.com/Maryam593/owddm.github.io/stargazers)
   
-  <img src="https://github.com/user-attachments/assets/40bc2818-5165-4e3f-b934-9a213491cf77" alt="GitPulse Demo" width="800" />
-</div>
+  ![GitPulse Screenshot](</div>![Uploading gitpulse .png…]())
 
-## 📖 Table of Contents
-
-- [Features](#-features)
-- [Demo](#-demo)
-- [Getting Started](#-getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-  - [Running the Application](#running-the-application)
-- [Built With](#-built-with)
-- [API Endpoints](#-api-endpoints)
-- [Contributing](#-contributing)
-- [License](#-license)
-- [Acknowledgments](#-acknowledgments)
 
 ## ✨ Features
 
