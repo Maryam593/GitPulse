@@ -5,8 +5,8 @@
   [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
   [![GitHub stars](https://img.shields.io/github/stars/Maryam593/owddm.github.io?style=social)](https://github.com/Maryam593/owddm.github.io/stargazers)
   
-  ![GitPulse Screenshot](https://i.imgur.com/your-screenshot-url.png)
-</div>
+  ![GitPulse Screenshot](</div>![Uploading gitpulse .png…]())
+
 
 ## ✨ Features
 
