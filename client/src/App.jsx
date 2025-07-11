@@ -8,25 +8,25 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const fetchGitHubStats = async (e) => {
-    e.preventDefault();
-    if (!username.trim()) return;
+ const fetchGitHubStats = async (e) => {
+  e.preventDefault();
+  if (!username.trim()) return;
 
-    setLoading(true);
-    setError('');
-    try {
-      const response = await axios.get(`http://localhost:5000/api/github-stats/${username}`);
-      setUserData({
-        ...response.data,
-        stats: response.data.stats
-      });
-    } catch (err) {
-      setError('Failed to fetch GitHub stats. Please try again.');
-      console.error('Error:', err);
-    } finally {
-      setLoading(false);
-    }
-  };
+  setLoading(true);
+  setError('');
+  try {
+    const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/github-stats/${username}`);
+    setUserData({
+      ...response.data,
+      stats: response.data.stats
+    });
+  } catch (err) {
+    setError('Failed to fetch GitHub stats. Please try again.');
+    console.error('Error:', err);
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="min-h-screen bg-gray-900 py-8 px-4 sm:px-6 lg:px-8">
