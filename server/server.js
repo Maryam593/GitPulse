@@ -7,7 +7,7 @@ const PORT = 5000;
 
 // Middleware
 app.use(cors({
-  origin: 'https://git-pulse.vercel.app', // Vercel site ka origin
+  origin: ['https://git-pulse.vercel.app', 'https://localhost:5173'], // Vercel site ka origin
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));

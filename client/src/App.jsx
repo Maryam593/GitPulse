@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
-import { Bars3BottomRightIcon, UserCircleIcon } from '@heroicons/react/24/outline';
+import { Bars3BottomRightIcon } from '@heroicons/react/24/outline';
 
 function App() {
   const [username, setUsername] = useState('');
@@ -8,28 +7,93 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
- const fetchGitHubStats = async (e) => {
-  e.preventDefault();
-  if (!username.trim()) return;
+  /**
+   * Fetches GitHub statistics for a given username.
+   * This function now directly fetches the user's avatar from GitHub API
+   * and constructs URLs for other stats images, rather than relying on Gemini API
+   * to fetch all external content. Gemini API is still used for structured data
+   * if needed, but for direct image/SVG URLs, client-side construction is more reliable.
+   * @param {Event} e - The form submission event.
+   */
+  const fetchGitHubStats = async (e) => {
+    e.preventDefault();
+    if (!username.trim()) return;
 
-  setLoading(true);
-  setError('');
-  try {
-    const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/github-stats/${username}`);
-    setUserData({
-      ...response.data,
-      stats: response.data.stats
-    });
-  } catch (err) {
-    setError('Failed to fetch GitHub stats. Please try again.');
-    console.error('Error:', err);
-  } finally {
-    setLoading(false);
-  }
-};
+    setLoading(true);
+    setError('');
+
+    try {
+      // 1. Fetch user profile data directly from GitHub API for avatar_url
+      const profileResponse = await fetch(`https://api.github.com/users/${username}`);
+      if (!profileResponse.ok) {
+        if (profileResponse.status === 404) {
+          throw new Error('GitHub user not found. Please check the username.');
+        }
+        throw new Error(`Failed to fetch GitHub profile: ${profileResponse.statusText}`);
+      }
+      const profileData = await profileResponse.json();
+      const avatarUrl = profileData.avatar_url;
+
+      // 2. Construct URLs for all stats images/SVGs directly
+      const githubStatsUrl = `https://github-readme-stats.vercel.app/api?username=${username}&show_icons=true&theme=dark`;
+      const streakStatsUrl = `https://github-readme-streak-stats.herokuapp.com?user=${username}&theme=dark`;
+      const topLangsUrl = `https://github-readme-stats-sigma-five.vercel.app/api/top-langs/?username=${username}&layout=compact&theme=dark`;
+      const heatmapUrl = `https://ghchart.rshah.org/${username}`;
+      const trophiesUrl = `https://github-profile-trophy.vercel.app/?username=${username}`; // This URL directly provides the SVG
+
+      // Update the state with the fetched avatar and constructed stats URLs
+      setUserData({
+        username: username, // Use the input username
+        avatar_url: avatarUrl,
+        stats: {
+          githubStatsUrl: githubStatsUrl,
+          streakStatsUrl: streakStatsUrl,
+          topLangsUrl: topLangsUrl,
+          heatmapUrl: heatmapUrl,
+          trophiesUrl: trophiesUrl // Now storing the URL, not the SVG content
+        }
+      });
+
+    } catch (err) {
+      setError(`Failed to fetch GitHub stats: ${err.message}. Please try again.`);
+      console.error('Error fetching GitHub stats:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <div className="min-h-screen bg-gray-900 py-8 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-900 py-8 px-4 sm:px-6 lg:px-8 font-sans">
+      <script src="https://cdn.tailwindcss.com"></script>
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+      <style>
+        {`
+        body { font-family: 'Inter', sans-serif; }
+        .rounded-lg { border-radius: 0.5rem; }
+        .shadow { box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); }
+        .border-green-600 { border-color: #059669; }
+        .bg-green-700 { background-color: #047857; }
+        .hover\\:bg-green-800:hover { background-color: #065F46; }
+        .focus\\:ring-green-600:focus { --tw-ring-color: #059669; }
+        .text-green-600 { color: #059669; }
+        .text-green-500 { color: #10B981; }
+        .hover\\:text-green-400:hover { color: #34D399; }
+        .bg-gray-800 { background-color: #1F2937; }
+        .bg-gray-900 { background-color: #111827; }
+        .border-gray-300 { border-color: #D1D5DB; }
+        .text-gray-300 { color: #D1D5DB; }
+        .text-gray-400 { color: #9CA3AF; }
+        .text-gray-500 { color: #6B7280; }
+        .text-gray-700 { color: #374151; }
+        .text-gray-900 { color: #111827; }
+        .bg-red-50 { background-color: #FEF2F2; }
+        .border-red-400 { border-color: #F87171; }
+        .text-red-400 { color: #F87171; }
+        .text-red-700 { color: #B91C1C; }
+        .disabled\\:opacity-50:disabled { opacity: 0.5; }
+        .disabled\\:cursor-not-allowed:disabled { cursor: not-allowed; }
+        `}
+      </style>
       <div className="max-w-6xl mx-auto">
         <h1 className="text-3xl font-bold text-center text-white mb-8">
           GitPulse - Track your GitHub life <span className="text-green-600">🫀</span>
@@ -44,7 +108,7 @@ function App() {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 placeholder="Enter GitHub username"
-                className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-600 focus:border-green-600"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-600 focus:border-green-600 bg-white text-gray-900 placeholder-gray-500"
                 disabled={loading}
               />
             </div>
@@ -60,8 +124,8 @@ function App() {
 
         {/* Error Message */}
         {error && (
-          <div className="max-w-3xl mx-auto mb-8 p-4 bg-red-50 border-l-4 border-red-400">
-            <div className="flex">
+          <div className="max-w-3xl mx-auto mb-8 p-4 bg-red-50 border-l-4 border-red-400 rounded-md">
+            <div className="flex items-center">
               <div className="flex-shrink-0">
                 <Bars3BottomRightIcon className="h-5 w-5 text-red-400" aria-hidden="true" />
               </div>
@@ -81,9 +145,10 @@ function App() {
                 <div className="flex flex-col sm:flex-row items-center text-center sm:text-left">
                   <div className="flex-shrink-0 mb-4 sm:mb-0 sm:mr-6">
                     <img
-                      className="h-24 w-24 rounded-full border-4 border-green-600"
+                      className="h-24 w-24 rounded-full border-4 border-green-600 object-cover"
                       src={userData.avatar_url}
                       alt={`${userData.username}'s avatar`}
+                      onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/96x96/6B7280/FFFFFF?text=${userData.username.charAt(0).toUpperCase()}`; }} // Fallback image
                     />
                   </div>
                   <div>
@@ -122,10 +187,11 @@ function App() {
                 <div className="px-4 py-5 sm:p-6">
                   <h3 className="text-lg font-medium text-white mb-4">GitHub Stats</h3>
                   <div className="w-full overflow-hidden rounded-lg">
-                    <img 
-                      src={`https://github-readme-stats.vercel.app/api?username=${userData.username}&show_icons=true&theme=dark`} 
-                      alt="GitHub Stats" 
+                    <img
+                      src={userData.stats.githubStatsUrl}
+                      alt="GitHub Stats"
                       className="w-full h-auto"
+                      onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/400x150/6B7280/FFFFFF?text=Stats+Unavailable`; }}
                     />
                   </div>
                 </div>
@@ -136,10 +202,11 @@ function App() {
                 <div className="px-4 py-5 sm:p-6">
                   <h3 className="text-lg font-medium text-white mb-4">Streak Stats</h3>
                   <div className="w-full overflow-hidden rounded-lg">
-                    <img 
-                      src={`https://github-readme-streak-stats.herokuapp.com?user=${userData.username}&theme=dark`} 
-                      alt="GitHub Streak" 
+                    <img
+                      src={userData.stats.streakStatsUrl}
+                      alt="GitHub Streak"
                       className="w-full h-auto"
+                      onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/400x150/6B7280/FFFFFF?text=Streak+Unavailable`; }}
                     />
                   </div>
                 </div>
@@ -150,10 +217,11 @@ function App() {
                 <div className="px-4 py-5 sm:p-6">
                   <h3 className="text-lg font-medium text-white mb-4">Top Languages</h3>
                   <div className="w-full overflow-hidden rounded-lg">
-                    <img 
-                      src={`https://github-readme-stats-sigma-five.vercel.app/api/top-langs/?username=${userData.username}&layout=compact&theme=dark`} 
-                      alt="Top Languages" 
+                    <img
+                      src={userData.stats.topLangsUrl}
+                      alt="Top Languages"
                       className="w-full h-auto"
+                      onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/600x200/6B7280/FFFFFF?text=Languages+Unavailable`; }}
                     />
                   </div>
                 </div>
@@ -164,10 +232,11 @@ function App() {
                 <div className="px-4 py-5 sm:p-6">
                   <h3 className="text-lg font-medium text-white mb-4">Contribution Heatmap</h3>
                   <div className="w-full overflow-hidden rounded-lg">
-                    <img 
-                      src={`https://ghchart.rshah.org/${userData.username}`} 
-                      alt="GitHub Contribution Heatmap" 
+                    <img
+                      src={userData.stats.heatmapUrl}
+                      alt="GitHub Contribution Heatmap"
                       className="w-full h-auto"
+                      onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/600x250/6B7280/FFFFFF?text=Heatmap+Unavailable`; }}
                     />
                   </div>
                 </div>
@@ -177,10 +246,16 @@ function App() {
               <div className="bg-gray-800 overflow-hidden shadow rounded-lg md:col-span-2">
                 <div className="px-4 py-5 sm:p-6">
                   <h3 className="text-lg font-medium text-white mb-4">GitHub Trophies</h3>
-                  <div 
-                    className="w-full overflow-hidden rounded-lg"
-                    dangerouslySetInnerHTML={{ __html: userData.stats.trophies }}
-                  />
+                  <div
+                    className="w-full overflow-hidden rounded-lg flex justify-center items-center"
+                  >
+                    <img
+                      src={userData.stats.trophiesUrl} // Now using the URL directly
+                      alt="GitHub Trophies"
+                      className="w-full h-auto"
+                      onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/600x100/6B7280/FFFFFF?text=Trophies+Unavailable`; }}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -188,7 +263,7 @@ function App() {
         )}
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
