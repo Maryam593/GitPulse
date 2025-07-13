@@ -4,6 +4,7 @@
  
   [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 </div>
+
 ## ✨ Features
 
 - 🎨 **Modern Dark Theme**: Sleek, GitHub-inspired dark interface that's easy on the eyes
