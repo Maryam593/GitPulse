@@ -1,7 +1,7 @@
 <div align="center">
   <h1>GitPulse</h1>
   <p>📊 A beautiful GitHub stats tracker with a modern dark theme</p>
-  
+  [![Netlify Status](https://api.netlify.com/api/v1/badges/5775456f-39db-4ea5-8cf7-134370a06ce5/deploy-status)](https://app.netlify.com/projects/gitbeat/deploys)
   [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 </div>
 
